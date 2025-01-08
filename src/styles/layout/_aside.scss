@@ -1,0 +1,64 @@
+.planAside {
+  // min-width:10%;
+  // max-width:10%;
+  text-align: center;
+  width: 100px;
+  height: 100vh;
+  // border: 1px solid $primary;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+
+  .logo {
+    // border-bottom: 1px solid $primary;
+    display: block;
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 65px;
+    }
+  }
+
+  .navbar {
+    padding: 0;
+    margin-top: 25px;
+    gap: 25px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    .bi {
+      font-size: 30px;
+      color: $primary;
+    }
+    h4 {
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+      color: $primary;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 15%;
+    .logo {
+      img {
+        width: 48px;
+        height: auto;
+      }
+    }
+
+    .navbar {
+      margin-top: 16px;
+      .bi {
+        font-size: 24px;
+      }
+      h4 {
+        font-size: 12px;
+        padding: 0 6px 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@import "./_reset.css";
+
+// 引入自訂顏色變數
+@import "./variables";
+
+// 引入所有的Bootstrap的CSS (有用npm安裝)
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// 引入Bootstrap icon (有用npm安裝)
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+// // 引入 Swiper
+// @import "../../node_modules/swiper/swiper-bundle.css";
+
+// layout相關
+@import "./layout/searchHeader_trans";
+@import "./layout/footer";
+@import "./layout/aside";
+
+// 首頁相關頁面
+@import "./page/index";
+
+// 行程推薦相關頁面
+@import "./page/schInfo";
+@import "./page/schMore";
+@import "./page/schCom";
+// 建立及編輯旅行計畫相關頁面
+@import "./page/buildPlan";
+@import "./page/editPlan";
+@import "./page/planList";
+
+// 景點資訊相關頁面
+@import "./page/searchSite";
+@import "./page/siteInfo";
+@import "./page/allSite";
+@import "./page/foodmap";
+
+// 預算與物品相關頁面
+@import "./page/budget";
+@import "./page/itemList";
+@import "./page/popupBudget";
+@import "./page/popupItemList";
+
+// 會員中心頁面
+@import "./page/member";
+@import "./icomoon/style.css";
+

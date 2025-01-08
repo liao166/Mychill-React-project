@@ -1,0 +1,74 @@
+header{
+  font-size: 38px;
+}
+.Trans {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 899;
+  background-color: transparent;
+}
+.offcanvas-body{
+  z-index: 999;
+  .nav-item {
+    display: flex;
+    align-items: center;
+  
+    .nav-link {
+      z-index: 999;
+      color:white;
+      font-size: 18px;
+  
+      &:hover {
+        color: $warning;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.searchNav {
+
+  // width: 100vw;
+  // display: flex;
+  // justify-content: space-evenly;
+  // align-items: center;
+  img {
+    height: 65px;
+  }
+
+  #loginBtn, #logoutBtn{
+    background-color: #e7ba48;
+    color: white;
+    width: auto;
+    border-radius: 25px;
+    font-size: 18px;
+
+    &:hover {
+      background-color: #e2ad25;
+      color: white;
+    }
+
+  }
+
+  #welcomeMessage {
+    font-size: 20px;
+    color: #4a859f;
+  }
+  .bi-plus-circle{
+    color: #4a859f;
+  
+    &:hover {
+  
+      color: white;
+      transition: 0.5s;
+      opacity: 0.8;
+    }
+  
+    
+  }
+  
+
+}
+
