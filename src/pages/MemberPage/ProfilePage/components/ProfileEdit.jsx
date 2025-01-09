@@ -12,6 +12,12 @@ function ProfileEdit(props) {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+
+        const size = calculateSize(value);
+        setInputSizes(prevSizes => ({
+            ...prevSizes,
+            [name]: size,
+        }));
     };
 
     // 將更新後的 formData 回傳給父組件
@@ -35,14 +41,11 @@ function ProfileEdit(props) {
 
     // 調整 input 長度
     const calculateSize = (value) => {
+        if (!value) return 0;
         let size = 0;
         for (let i = 0; i < value.length; i++) {
             const charCode = value.charCodeAt(i);
-            if (charCode >= 0x4e00 && charCode <= 0x9fff) {
-                size += 2; // 中文字符加2
-            } else {
-                size += 1; // 非中文字符加1
-            }
+            size += (charCode >= 0x4e00 && charCode <= 0x9fff) ? 2 : 1; // 中文2個字元，非中文1個字元
         }
         return size;
     };
@@ -62,16 +65,19 @@ function ProfileEdit(props) {
             inputRefs.current[0].focus();
         }
 
-        const sizes = {
-            uname: calculateSize(member.uname),
-            email: calculateSize(member.email || '未填寫'),
-            password: calculateSize(member.password || '未填寫'),
-            birthday: calculateSize(myBirthday || '未填寫'),
-            address: calculateSize(member.address || '未填寫'),
-            cellphone: calculateSize(member.cellphone || '未填寫'),
-            telephone: calculateSize(member.telephone || '未填寫')
-        };
-        setInputSizes(sizes);
+        // 計算並設置每個輸入框的大小，根據 member 資料
+        const initialSizes = {};
+        for (const key in member) {
+            if (key !== 'birthday') {  // 其他字段根據 member 設置大小
+                initialSizes[key] = calculateSize(member[key]);
+            }
+        }
+
+        // 計算生日的大小並更新
+        const birthdaySize = calculateSize(myBirthday);
+        initialSizes.birthday = birthdaySize;
+
+        setInputSizes(initialSizes);
     }, [member]);
 
     return (

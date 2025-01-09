@@ -46,7 +46,7 @@ function Sidebar() {
                 <nav className="navbar navbar-light fixed-top">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="/">
-                            <img src="../assets/images/logo/chillAround_logo_01.png" />
+                            <img src="/public/images/logo/chillAround_logo_01.png" />
                         </a>
                         <button className="navbar-toggler text-primary" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"

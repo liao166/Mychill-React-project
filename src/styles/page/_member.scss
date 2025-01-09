@@ -486,20 +486,6 @@
                             resize: vertical;
                         }
 
-                        .addr {
-                            display: none;
-                        }
-
-                        @media screen and (max-width: 768px) {
-                            #address {
-                                display: none;
-                            }
-
-                            .addr {
-                                display: block;
-                            }
-                        }
-
                         @media screen and (max-width: 768px) {
                             .col-sm-12:nth-child(1) {
                                 border-bottom: 1px solid #DEDEDE;

@@ -9,6 +9,7 @@ const ProfileData = () => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [formData, setFormData] = useState({});
     const [imagePreview, setImagePreview] = useState();
+    const [uphotoValue, setUphotovalue] = useState('');
 
     useEffect(() => {
         if (!token) {
@@ -36,6 +37,44 @@ const ProfileData = () => {
             });
     }, []);
 
+    // 一開始的圖片
+    useEffect(() => {
+        if (member.uphoto) {
+            setImagePreview(`/public/images/memberimg/${member.uphoto}`);
+        }
+    }, [member]);
+
+    // 處理上傳圖片
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        const { name, value } = e.target;
+        if (file) {
+            const readFile = new FileReader();
+
+            readFile.onload = () => {
+                const imageUrl = readFile.result;
+                setImagePreview(imageUrl);
+            };
+
+            readFile.readAsDataURL(file);
+
+            setUphotovalue(file.name);
+        }
+    };
+
+    // 傳入更新表單資料
+    const handleUpdateFormData = (updatedFormData) => {
+        setFormData(prevFormData => {
+            if (JSON.stringify(prevFormData) !== JSON.stringify(updatedFormData)) {
+                return {
+                    ...prevFormData,
+                    ...updatedFormData
+                };
+            }
+            return prevFormData;  // 如果不需要更新則傳回之前的狀態
+        });
+    };
+
     const handleEdit = (e) => {
         e.preventDefault();
         setEditing(true);
@@ -50,10 +89,29 @@ const ProfileData = () => {
 
     const handleSave = async (e) => {
         e.preventDefault();
+        let msg = "確定儲存?";
+        if (!confirm(msg)) return false;
+
+        const updatedFormData = new FormData();
+
+        // 將 formData 的內容加入到 FormData 中
+        for (const key in formData) {
+            updatedFormData.append(key, formData[key]);
+        }
+
+        // 如果有選擇檔案，則將檔案加入 FormData
+        if (uphotoValue) {
+            const file = document.querySelector('input[name="uphoto"]').files[0]; // 取得 input[type="file"] 中的檔案
+            if (file) {
+                updatedFormData.append('uphoto', file);  // 將檔案加入 FormData 中
+            }
+        }
+
         // 處理儲存邏輯
-        axios.post('http://localhost:8080/member/update', formData, {
+        axios.post('http://localhost:8080/member/update', updatedFormData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
             }
         })
             .then(response => {
@@ -70,36 +128,6 @@ const ProfileData = () => {
                 }
             });
     };
-
-    // 一開始的圖片
-    useEffect(() => {
-        if (member.uphoto) {
-            setImagePreview(`/public/images/memberimg/${member.uphoto}`);
-        }
-    }, [member]);
-
-    // 處理上傳圖片
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        var readFile = new FileReader();
-        readFile.readAsDataURL(file);
-        readFile.onload = () => {
-            const imageUrl = readFile.result;
-            setImagePreview(imageUrl);
-            const photoElement = document.getElementById('uphoto');
-            photoElement.setAttribute('value', file.name);
-            setMember({ ...formData, uphoto: file.name });
-        };
-    };
-
-    const filename = member.uphoto ? member.uphoto : formData.uphoto;
-
-    // 傳入更新表單資料
-    const handleUpdateFormData = (updatedFormData) => {
-        setFormData({ ...updatedFormData, uphoto: filename });
-    };
-
-    console.log(formData);
 
     // Google 按鈕
     useEffect(() => {

@@ -4,7 +4,7 @@ const path = require('path');
 // 設置存儲位置和文件名
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '/public/images/memberimg')); // 確保這個路徑存在
+        cb(null, path.join(__dirname, '../../public/images/memberimg')); // 確保這個路徑存在
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname)); // 使用當前時間戳作為文件名
