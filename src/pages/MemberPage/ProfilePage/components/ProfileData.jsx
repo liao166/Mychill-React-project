@@ -35,7 +35,7 @@ const ProfileData = () => {
                     alert('無法讀取會員資料:' + error);
                 }
             });
-    }, []);
+    }, [token]);
 
     // 一開始的圖片
     useEffect(() => {
@@ -47,7 +47,6 @@ const ProfileData = () => {
     // 處理上傳圖片
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        const { name, value } = e.target;
         if (file) {
             const readFile = new FileReader();
 
@@ -64,15 +63,7 @@ const ProfileData = () => {
 
     // 傳入更新表單資料
     const handleUpdateFormData = (updatedFormData) => {
-        setFormData(prevFormData => {
-            if (JSON.stringify(prevFormData) !== JSON.stringify(updatedFormData)) {
-                return {
-                    ...prevFormData,
-                    ...updatedFormData
-                };
-            }
-            return prevFormData;  // 如果不需要更新則傳回之前的狀態
-        });
+        setFormData(updatedFormData);
     };
 
     const handleEdit = (e) => {
@@ -83,7 +74,8 @@ const ProfileData = () => {
     const handleCancel = () => {
         if (window.confirm('確定取消編輯?')) {
             setEditing(false);
-            location.reload();
+            setFormData({ ...member });
+            setImagePreview(member.uphoto ? `/public/images/memberimg/${member.uphoto}` : null);
         }
     };
 
@@ -91,6 +83,13 @@ const ProfileData = () => {
         e.preventDefault();
         let msg = "確定儲存?";
         if (!confirm(msg)) return false;
+
+        const form = document.getElementById('form');
+
+        if (!form.checkValidity()) {
+            form.reportValidity(); // 顯示瀏覽器的驗證錯誤
+            return;
+        }
 
         const updatedFormData = new FormData();
 
@@ -158,11 +157,14 @@ const ProfileData = () => {
     // Google 綁定
     const handleCallback = async (response) => {
         const data = await parseJwt(response.credential);
-        await axios.post("http://localhost:8080/member/GoogleBind", { data })
-            .then(response => {
-                alert(response.data.message);
-                location.reload(); // 成功後重新載入頁面
-            })
+        await axios.post("http://localhost:8080/member/GoogleBind", { data }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(response => {
+            alert(response.data.message);
+            location.reload(); // 成功後重新載入頁面
+        })
             .catch(error => {
                 console.error("綁定失敗:", error);
                 alert(error.response.data.message);

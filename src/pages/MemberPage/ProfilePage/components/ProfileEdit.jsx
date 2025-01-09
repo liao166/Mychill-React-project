@@ -6,7 +6,9 @@ function ProfileEdit(props) {
     const { member, onUpdateFormData } = props;
     const [inputSizes, setInputSizes] = useState({});
     const inputRefs = useRef([]);
-    const [formData, setFormData] = useState({ ...member });
+    // 格式化生日為 'YYYY-MM-DD' 格式，避免時區造成的日期偏移
+    const formatBirthday = member.birthday ? moment(member.birthday).format('YYYY-MM-DD') : '';
+    const [formData, setFormData] = useState({ ...member, birthday: formatBirthday }); // 格式化後的生日傳入
 
     // input 資料
     const handleInputChange = (e) => {
@@ -32,7 +34,7 @@ function ProfileEdit(props) {
         flatpickr(inputRefs.current[3], {
             allowInput: true,
             dateFormat: 'Y-m-d',
-            defaultDate: formData.birthday || 'today',
+            defaultDate: myBirthday || 'today',
             onChange: function (_, dateStr) {
                 setFormData({ ...formData, birthday: dateStr });
             }
@@ -91,11 +93,11 @@ function ProfileEdit(props) {
             <div className="item row">
                 <div className="col-md-6 col-sm-12">
                     <label className="col-form-label">電子信箱：</label>
-                    <input type="email" name="email" id="email" className="inpwrite" value={formData.email} size={inputSizes.email} placeholder="請輸入電子信箱" onChange={handleInputChange} ref={el => inputRefs.current[1] = el} />
+                    <input type="email" name="email" id="email" className="inpwrite" value={formData.email} size={inputSizes.email} placeholder="請輸入電子信箱" required onChange={handleInputChange} ref={el => inputRefs.current[1] = el} />
                 </div>
                 <div className="col-md-6 col-sm-12">
                     <label className="col-form-label">密碼：</label>
-                    <input type="text" name="password" id="password" className="inpwrite" value={formData.password} minLength="6" size={inputSizes.password} placeholder="請輸入密碼" onChange={handleInputChange} ref={el => inputRefs.current[2] = el} />
+                    <input type="text" name="password" id="password" className="inpwrite" value={formData.password} minLength="6" size={inputSizes.password} placeholder="請輸入密碼" required onChange={handleInputChange} ref={el => inputRefs.current[2] = el} />
                 </div>
             </div>
             <div className="item row">
@@ -127,14 +129,14 @@ function ProfileEdit(props) {
                 <div className="col-12">
                     <label className="col-form-label">手機號碼：</label>
                     <input type="text" name="cellphone" id="cellphone" className="inpwrite" value={formData.cellphone}
-                        size={inputSizes.cellphone} placeholder="請輸入手機號碼" pattern="09[0-9]{8}" onChange={handleInputChange} ref={el => inputRefs.current[5] = el} />
+                        size={inputSizes.cellphone} placeholder="請輸入手機號碼" pattern="09[0-9]{8}" required onChange={handleInputChange} ref={el => inputRefs.current[5] = el} />
                 </div>
             </div>
             <div className="item row">
                 <div className="col-12">
                     <label className="col-form-label">市內電話：</label>
                     <input type="text" name="telephone" id="telephone" className="inpwrite" value={formData.telephone}
-                        size={inputSizes.telephone} placeholder="請輸入市內電話" pattern="0[2-8]{1}[0-9]{8}" onChange={handleInputChange} ref={el => inputRefs.current[6] = el} />
+                        size={inputSizes.telephone} placeholder="請輸入市內電話" pattern="0[2-8]{1}[0-9]{8}" required onChange={handleInputChange} ref={el => inputRefs.current[6] = el} />
                 </div>
             </div>
         </>
