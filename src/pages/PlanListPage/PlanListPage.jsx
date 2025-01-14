@@ -3,7 +3,7 @@ import axios from "axios";
 import Aside from "../../components/layout/Aside";
 import MapDisplay from "../../components/widgets/MapDisplay";
 
-const emailid = 1; // 之後改從會員拿
+const emailid = localStorage.getItem('emailid');
 
 axios
   .get(`http://localhost:8080/buildPlan/planList/${emailid}`)

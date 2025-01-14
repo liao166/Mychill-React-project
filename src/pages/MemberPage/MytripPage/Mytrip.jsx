@@ -1,5 +1,6 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
+import MytripData from "./components/MytripData";
 
 function Mytrip() {
     return (
@@ -10,7 +11,7 @@ function Mytrip() {
                         <Sidebar />
                     </div>
                     <div className="col-md-10 mytrip">
-
+                        <MytripData />
                     </div>
                 </div>
             </div>

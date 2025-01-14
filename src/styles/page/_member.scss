@@ -711,6 +711,13 @@
                                 margin-right: 1px;
                             }
                         }
+
+                        .disabled {
+                            pointer-events: none;/* 禁用點擊效果 */
+                            color: #ccc;
+                            cursor: not-allowed;/* 顯示禁用的游標樣式 */
+                            opacity: 0.6;
+                        }
                     }
 
                     span {
@@ -905,6 +912,13 @@
                                 line-height: 26px;
                                 margin-right: 1px;
                             }
+                        }
+
+                        .disabled {
+                            pointer-events: none;/* 禁用點擊效果 */
+                            color: #ccc;
+                            cursor: not-allowed;/* 顯示禁用的游標樣式 */
+                            opacity: 0.6;
                         }
 
                         span {
