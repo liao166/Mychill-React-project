@@ -17,7 +17,7 @@ const TagButtons = () => {
 
   const handleTagClick = (tagId) => {
     console.log(tagId);
-    // window.location.href = `/chill-around-project/pages/schMore.html?site_city=${encodeURIComponent}&tag_id=${encodeURIComponent(tagId)}`;
+    window.location.href = `/schMore?tag_id=${encodeURIComponent(tagId)}`;
   };
 
   return (

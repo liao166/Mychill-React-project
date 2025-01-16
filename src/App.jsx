@@ -6,7 +6,8 @@ import BudgetPage from "./pages/BudgetPage/BudgetPage.jsx";
 import PopupBudgetPage from "./pages/PopupBudgetPage/PopupBudgetPage.jsx";
 import ItemListPage from "./pages/ItemListPage/ItemListPage.jsx";
 import PopupItemListPage from "./pages/PopupItemListPage/PopupItemListPage.jsx";
-import SchInfo from "./pages/schInfoPage/SchInfo.jsx";
+import SchInfo from "./pages/schInfoPage/schInfo.jsx";
+import SchMore from "./pages/schInfoPage/schMore.jsx";
 import BuildPlan from "./pages/BuildPlanPage/BuildPlanPage.jsx";
 import EditPlan from "./pages/EditPlanPage/EditPlanPage.jsx";
 import PlanList from "./pages/PlanListPage/PlanListPage.jsx";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="*" element={<h1>找不到頁面</h1>} />
         <Route path="/schInfo" element={<SchInfo />} />
+        <Route path="/schMore" element={<SchMore />} />
         <Route path="/bulidPlan" element={<BuildPlan />} />
         <Route path="/editPlan" element={<EditPlan />} />
         <Route path="/planList" element={<PlanList />} />
