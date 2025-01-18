@@ -130,7 +130,7 @@ function Register() {
         <div className="container-fluid">
             <div className="mycard">
                 <div className="text-center mb-3">
-                    <a href="/"><img src="/public/images/logo/chillAround_logo_01.png" /></a>
+                    <a href="/"><img src="/images/logo/chillAround_logo_01.png" /></a>
                 </div>
                 <form id="form" onSubmit={handleSubmit}>
                     <h3 className="title text-center">會員註冊</h3>

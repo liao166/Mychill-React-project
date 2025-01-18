@@ -28,7 +28,7 @@ const Header = () => {
             setIsLoggedIn(false);
             setToken(null);
             alert("登出成功!");
-            window.location.href = '/';
+            window.location.reload();
         }
     };
 
@@ -93,7 +93,7 @@ const Header = () => {
                                     )}
                                 </li>
                                 <li className="nav-item d-flex p-2">
-                                    <a href="buildPlan.html"><i className="bi bi-plus-circle"></i></a>
+                                    <a href="buildPlan"><i className="bi bi-plus-circle"></i></a>
                                 </li>
                             </ul>
                         </div>

@@ -144,7 +144,7 @@ function MycollectionData() {
                                     <div className="row align-items-center">
                                         <div className="col-md-4">
                                             <img
-                                                src={`/public/images/searchSite/${schedule.photo_one}`}
+                                                src={`/images/searchSite/${schedule.photo_one}`}
                                                 className="img-fluid"
                                                 alt="行程圖片"
                                             />

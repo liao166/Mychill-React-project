@@ -45,7 +45,7 @@ function SchInfo() {
 
         {/* <!-- 行程more --> */}
         <nav className="container d-flex justify-content-center align-items-center my-5">
-          <a href="schMore.html">
+          <a href="schMore">
             <button
               className="btn btn-secondary"
               style={{

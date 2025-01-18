@@ -19,7 +19,7 @@ function Sidebar() {
             <div className="desktop">
                 <div>
                     <a href="/">
-                        <img src="/public/images/logo/chillAround_logo_01.png" />
+                        <img src="/images/logo/chillAround_logo_01.png" />
                     </a>
                     <div className="sidebar text-start">
                         <div id="personaldata" className={`item ${isProfilePage ? 'active' : ''}`}>
@@ -46,7 +46,7 @@ function Sidebar() {
                 <nav className="navbar navbar-light fixed-top">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="/">
-                            <img src="/public/images/logo/chillAround_logo_01.png" />
+                            <img src="/images/logo/chillAround_logo_01.png" />
                         </a>
                         <button className="navbar-toggler text-primary" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"

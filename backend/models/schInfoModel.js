@@ -1,5 +1,43 @@
 const db = require("../config/database");
 
+// 獲取縣市地名的模組函數
+exports.getCityName = () => {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM `city`';
+    db.exec(sql, (error, results, fields) => {
+      if (results) {
+        resolve(results);
+      } else {
+        console.error("無法獲取縣市名稱");
+      }
+      if (error) {
+        console.error("錯誤訊息:", error);
+        reject(error);
+        return;
+      }
+    });
+  });
+}
+
+// 獲取標籤資料的模組函數
+exports.getTagName = () => {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM `all_tag`';
+    db.exec(sql, (error, results, fields) => {
+      if (results) {
+        resolve(results);
+      } else {
+        console.error("無法獲取標籤資料");
+      }
+      if (error) {
+        console.error("錯誤訊息:", error);
+        reject(error);
+        return;
+      }
+    });
+  });
+}
+
 // 獲取取特定編號行程的模組函數
 exports.findScheduleById = (id) => {
   return new Promise((resolve, reject) => {
@@ -64,22 +102,19 @@ exports.getScheduleCardData = (regions, tags) => {
     let whereClauses = []; // 儲存 WHERE 條件
 
     // 地區篩選
-   // 地區篩選
-if (regions) {
-  const regionArray = regions.split(',');
-  whereClauses.push(`si.site_city IN (?)`);
-  parameters.push(regionArray);
-}
+    // 地區篩選
+    if (regions) {
+      const regionArray = regions.split(',');
+      whereClauses.push(`si.site_city IN (?)`);
+      parameters.push(regionArray);
+    }
 
-// 標籤篩選
-if (tags) {
-  const tagArray = tags.split(',');
-  tagArray.forEach(tagId => {
-      // query += ' AND a.tag_id = ?';
-      whereClauses.push('t.tag_id = ?') // 每個標籤條件
-      parameters.push(tagId); // 將每個標籤 ID 加入參數中
-  });
-}
+    // 標籤篩選
+    if (tags) {
+      const tagArray = tags.split(',');
+      whereClauses.push('t.tag_id IN (?)') // 每個標籤條件
+      parameters.push(tagArray); // 將每個標籤 ID 加入參數中
+    }
 
 
     // 如果有 WHERE 條件
@@ -92,7 +127,7 @@ if (tags) {
       s.sch_id, s.sch_name, s.edit_date, si.photo_one, si.photo_two, si.site_add ;
     `;
 
-   
+
     // console.log("參數:", parameters);
     // console.log("WHERE 條件:", whereClauses);
 
@@ -277,17 +312,17 @@ exports.addScheduleId = (emailid, sch_id) => {
 //移除
 exports.deleteScheduleId = (emailid, sch_id) => {
   return new Promise((resolve, reject) => {
-      const sql = 'DELETE FROM member_like WHERE emailid = ? AND sch_id = ?'; // 刪除指定的 emailid 和 sch_id
-      const deleteParams = [emailid, sch_id];
+    const sql = 'DELETE FROM member_like WHERE emailid = ? AND sch_id = ?'; // 刪除指定的 emailid 和 sch_id
+    const deleteParams = [emailid, sch_id];
 
-      db.exec(sql, deleteParams, (err, result) => {
-          if (err) {
-              console.error('刪除失敗:', err);
-              reject(err); // 發生錯誤時拒絕 Promise
-          } else {
-              resolve(result); // 成功時解析 Promise
-          }
-      });
+    db.exec(sql, deleteParams, (err, result) => {
+      if (err) {
+        console.error('刪除失敗:', err);
+        reject(err); // 發生錯誤時拒絕 Promise
+      } else {
+        resolve(result); // 成功時解析 Promise
+      }
+    });
   });
 };
 
@@ -311,15 +346,15 @@ exports.deleteScheduleId = (emailid, sch_id) => {
 
 exports.getLikedItems = (emailid) => {
   return new Promise((resolve, reject) => {
-      const sql = 'SELECT sch_id FROM member_like ';
-      db.exec(sql, [emailid], (err, result) => {
-          if (err) {
-              console.error('查詢失敗:', err);
-              return reject(err);
-          }
-          // 返回 sch_id 陣列
-          resolve(result.map(row => row.sch_id));
-      });
+    const sql = 'SELECT sch_id FROM member_like ';
+    db.exec(sql, [emailid], (err, result) => {
+      if (err) {
+        console.error('查詢失敗:', err);
+        return reject(err);
+      }
+      // 返回 sch_id 陣列
+      resolve(result.map(row => row.sch_id));
+    });
   });
 };
 

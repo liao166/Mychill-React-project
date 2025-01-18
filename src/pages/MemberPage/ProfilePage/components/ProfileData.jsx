@@ -40,7 +40,7 @@ const ProfileData = () => {
     // 一開始的圖片
     useEffect(() => {
         if (member.uphoto) {
-            setImagePreview(`/public/images/memberimg/${member.uphoto}`);
+            setImagePreview(`/images/memberimg/${member.uphoto}`);
         }
     }, [member]);
 
@@ -77,7 +77,7 @@ const ProfileData = () => {
         if (window.confirm('確定取消編輯?')) {
             setEditing(false);
             setFormData({ ...member });
-            setImagePreview(member.uphoto ? `/public/images/memberimg/${member.uphoto}` : null);
+            setImagePreview(member.uphoto ? `/images/memberimg/${member.uphoto}` : null);
         }
     };
 
@@ -290,11 +290,11 @@ const ProfileData = () => {
                                 <div className="title">綁定帳戶：</div>
                                 <div className="googleline">
                                     <div className="item">
-                                        <img src="/public/images/memberimg/logo_google_g_icon.png" className="googleimg" />
+                                        <img src="/images/memberimg/logo_google_g_icon.png" className="googleimg" />
                                         {member.googleid ? <button type="button" className="btn google" data-bs-toggle="modal" data-bs-target="#googleModal">已綁定</button> : <div id='google'></div>}
                                     </div>
                                     <div className="item">
-                                        <img src="/public/images/memberimg/btn_base.png" className="lineimg" />
+                                        <img src="/images/memberimg/btn_base.png" className="lineimg" />
                                         <button type="button" id="line" className="btn" data-bs-toggle="modal" data-bs-target={member.lineid ? '#lineModal' : ''} onClick={member.lineid ? undefined : handleLineLogin}>{member.lineid ? '已綁定' : '未綁定'}</button>
                                     </div>
                                 </div>
@@ -314,7 +314,7 @@ const ProfileData = () => {
                                 <div className="row align-items-center g-0">
                                     <div className="col-md-4 col-sm-12 d-flex justify-content-center">
                                         <div id="photo" className="d-flex justify-content-center align-items-center">
-                                            {member.uphoto ? <img id="img" src={`/public/images/memberimg/${member.uphoto}`} /> : <p>請上傳圖片</p>}
+                                            {member.uphoto ? <img id="img" src={`/images/memberimg/${member.uphoto}`} /> : <p>請上傳圖片</p>}
                                         </div>
                                     </div>
                                     <div className="col-md-8 col-sm-12">
@@ -333,11 +333,11 @@ const ProfileData = () => {
                                 <div className="title">綁定帳戶：</div>
                                 <div className="googleline">
                                     <div className="item">
-                                        <img src="/public/images/memberimg/logo_google_g_icon.png" className="googleimg" />
+                                        <img src="/images/memberimg/logo_google_g_icon.png" className="googleimg" />
                                         {member.googleid ? <button type="button" className="btn google" data-bs-toggle="modal" data-bs-target="#googleModal">已綁定</button> : <div id='google'></div>}
                                     </div>
                                     <div className="item">
-                                        <img src="/public/images/memberimg/btn_base.png" className="lineimg" />
+                                        <img src="/images/memberimg/btn_base.png" className="lineimg" />
                                         <button type="button" id="line" className="btn" data-bs-toggle="modal" data-bs-target={member.lineid ? '#lineModal' : ''} onClick={member.lineid ? undefined : handleLineLogin}>{member.lineid ? '已綁定' : '未綁定'}</button>
                                     </div>
                                 </div>

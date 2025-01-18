@@ -15,7 +15,6 @@ function Index() {
           {/* <!-- Swiper --> */}
             <SwiperCarousel/>
       </div>
-        
     );
   }
 

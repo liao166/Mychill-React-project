@@ -16,6 +16,27 @@ exports.getSiteInfo = async (req, res) => {
     }
 }
 
+// 獲取縣市地名的控制器
+exports.getCity = async (req, res) => {
+    try {
+        const city = await schInfoModel.getCityName();
+        res.json(city);
+    } catch (error) {
+        console.error("獲取縣市名稱失敗:", error);
+        res.status(500).json({ message: "無法獲取縣市名稱!" });
+    }
+}
+
+// 獲取標籤資料的控制器
+exports.getTag = async (req, res) => {
+    try {
+        const tagdata = await schInfoModel.getTagName();
+        res.json(tagdata);
+    } catch (error) {
+        console.error("獲取標籤資料失敗:", error);
+        res.status(500).json({ message: "無法獲取標籤資料!" });
+    }
+}
 
 // 獲取旅行計畫資料帶入完成頁面
 exports.getScheduleById = async (req, res) => {

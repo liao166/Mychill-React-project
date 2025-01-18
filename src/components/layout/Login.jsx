@@ -19,7 +19,7 @@ function Login() {
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('emailid', response.data.emailid);
                     alert("登入成功!");
-                    window.location.href = "/";
+                    window.location.reload();
                 }
             })
             .catch(error => {

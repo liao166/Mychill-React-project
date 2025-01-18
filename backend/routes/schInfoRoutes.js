@@ -27,6 +27,12 @@ router.get("/Info", function (req, res) {
 //http://localhost:8080/schInfo/siteinfo
 router.get('/siteinfo', schInfoController.getSiteInfo);
 
+// GET 請求:取得縣市地名
+router.get('/city', schInfoController.getCity);
+
+// GET 請求:取得標籤資料
+router.get('/tag', schInfoController.getTag);
+
 // GET 請求:取得行程、標籤及內容景點資料
 //http://localhost:8080/schInfo/getsch
 router.get('/getsch', schInfoController.getSch);
