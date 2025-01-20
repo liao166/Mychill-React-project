@@ -17,7 +17,8 @@ const TagButtons = () => {
 
   const handleTagClick = (tagId) => {
     console.log(tagId);
-    window.location.href = `/schMore?tag_id=${encodeURIComponent(tagId)}`;
+    localStorage.setItem('tag_id', tagId);
+    window.location.href = `/schMore`;
   };
 
   return (

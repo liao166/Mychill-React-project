@@ -10,12 +10,15 @@ function SchMore() {
     const [selectedCities, setSelectedCities] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
 
-    // 從 URL 中獲取參數
+    // 獲取參數 tag_id
     useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectTagId = urlParams.get('tag_id');
-        setSelectedTags(selectTagId ? [Number(selectTagId)] : []);
-    }, []);
+        const tag_id = localStorage.getItem('tag_id');
+        if (tag_id) {
+            setSelectedTags([Number(tag_id)]);
+        } else {
+            setSelectedTags([]);
+        }
+    }, [localStorage.getItem('tag_id')]);
 
     // 獲取縣市地名
     useEffect(() => {
@@ -29,7 +32,7 @@ function SchMore() {
             });
     }, []);
 
-    // 獲取縣市地名
+    // 獲取標籤資料
     useEffect(() => {
         axios.get('http://localhost:8080/schInfo/tag')
             .then((response) => {
@@ -52,6 +55,7 @@ function SchMore() {
     // 更新選中的標籤
     const handleTagChange = (e) => {
         const { value, checked } = e.target;
+        localStorage.removeItem('tag_id');
         setSelectedTags((prev) =>
             checked ? [...prev, value] : prev.filter((tag) => tag !== value)
         );

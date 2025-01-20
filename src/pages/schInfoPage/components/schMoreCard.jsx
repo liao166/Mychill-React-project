@@ -98,10 +98,12 @@ function SchMoreCard({ selectedCities, selectedTags }) {
 
     // 當篩選條件變化時，重新加載卡片
     useEffect(() => {
-        if (selectedTags.length > 0 || selectedCities.length > 0) {
+        if (selectedTags.length > 0) {
             updateCards();
+        } else {
+            renderRandomCards();
         }
-    }, [selectedCities, selectedTags]);
+    }, [selectedTags]);
 
     // 渲染卡片
     if (!cards.length) {
