@@ -61,7 +61,7 @@ const CardWithLike = () => {
     // 點擊卡片跳轉
     const handleCardClick = (schId) => {
         localStorage.setItem('selectedSchId', schId);
-        window.location.href = 'schCom.html';
+        window.location.href = 'schCom';
     };
 
     return (

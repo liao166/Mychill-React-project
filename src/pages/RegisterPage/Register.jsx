@@ -29,7 +29,7 @@ function Register() {
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem("emailid", response.data.emailid);
                     alert("註冊成功!請更新會員資料。");
-                    window.location.href = '/profile';
+                    window.location.href = 'profile';
                 }
             })
             .catch(error => {
@@ -77,13 +77,13 @@ function Register() {
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("emailid", response.data.emailid);
                     alert(response.data.message);
-                    window.location.href = "/profile";
+                    window.location.href = "profile";
                 }
             })
             .catch(error => {
                 console.error("註冊失敗:", error);
                 alert(error.response.data.message);
-                window.location.href = "/register";
+                window.location.href = "register";
             });
     }
 
@@ -113,14 +113,14 @@ function Register() {
                         localStorage.setItem("token", response.data.token);
                         localStorage.setItem("emailid", response.data.emailid);
                         alert(response.data.message);
-                        window.location.href = "/profile";
+                        window.location.href = "profile";
                     } else {
                         alert(response.data.message || "註冊失敗");
                     }
                 } catch (error) {
                     console.error("註冊失敗:", error);
                     alert(error.response.data.message);
-                    window.location.href = "/register";
+                    window.location.href = "register";
                 }
             })();
         }

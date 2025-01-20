@@ -119,7 +119,7 @@ const ProfileData = () => {
             .then(response => {
                 if (response.data) {
                     alert(response.data.message);
-                    window.location.href = "/profile";
+                    window.location.href = "profile";
                 }
             })
             .catch(error => {
@@ -166,7 +166,7 @@ const ProfileData = () => {
             }
         }).then(response => {
             alert(response.data.message);
-            location.reload(); // 成功後重新載入頁面
+            window.location.reload(); // 成功後重新載入頁面
         })
             .catch(error => {
                 console.error("綁定失敗:", error);
@@ -183,7 +183,7 @@ const ProfileData = () => {
         }).then(response => {
             if (response.data) {
                 alert(response.data.message);
-                location.reload();
+                window.location.reload();
             }
         }).catch(error => {
             console.error("解除失敗:", error);
@@ -217,7 +217,7 @@ const ProfileData = () => {
             }).then(response => {
                 if (response.data) {
                     alert(response.data.message);
-                    window.location.href = "/profile";
+                    window.location.href = "profile";
                 }
             }).catch(error => {
                 console.error("綁定失敗:", error);
@@ -235,7 +235,7 @@ const ProfileData = () => {
         }).then(response => {
             if (response.data) {
                 alert(response.data.message);
-                location.reload();
+                window.location.reload();
             }
         }).catch(error => {
             console.error("解除失敗:", error);
