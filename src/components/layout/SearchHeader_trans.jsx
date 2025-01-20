@@ -5,7 +5,6 @@ import Login from './Login';
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [token, setToken] = useState(localStorage.getItem('token'));
-    const [showModal, setShowModal] = useState(false);
 
     // UseEffect to update login status based on token
     useEffect(() => {
@@ -16,15 +15,16 @@ const Header = () => {
         }
     }, [token]);
 
-    // Toggle modal visibility
-    const toggleModal = () => {
-        setShowModal(!showModal);
-    };
+    // 清除 tag_id
+    const cleanTagid = () => {
+        localStorage.removeItem('tag_id');
+    }
 
     // Handle logout
     const handleLogout = () => {
         if (isLoggedIn && window.confirm('您確定要登出嗎？')) {
             localStorage.removeItem('token');
+            localStorage.removeItem('tag_id');
             setIsLoggedIn(false);
             setToken(null);
             alert("登出成功!");
@@ -38,10 +38,10 @@ const Header = () => {
             return (
                 <>
                     <li className="nav-item my-2">
-                        <a href="/profile" className="nav-link">會員中心</a>
+                        <a href="/profile" className="nav-link" onClick={cleanTagid}>會員中心</a>
                     </li>
                     <li className="nav-item my-2">
-                        <a href="/planList" className="nav-link">我的計畫</a>
+                        <a href="/planList" className="nav-link" onClick={cleanTagid}>我的計畫</a>
                     </li>
                 </>
             );
@@ -69,17 +69,17 @@ const Header = () => {
                         <div className="offcanvas-body">
                             <ul className="navbar-nav nav-underline me-auto" style={{ fontSize: '0.8rem' }}>
                                 <li className="nav-item my-2">
-                                    <Link to="/" className="nav-link">首頁</Link>
+                                    <Link to="/" className="nav-link" onClick={cleanTagid}>首頁</Link>
                                 </li>
                                 <li className="nav-item my-2">
-                                    <Link to="/schInfo" className="nav-link">行程推薦</Link>
+                                    <Link to="/schInfo" className="nav-link" onClick={cleanTagid}>行程推薦</Link>
                                 </li>
                                 <li className="nav-item my-2">
-                                    <Link to="/searchSite" className="nav-link">景點推薦</Link>
+                                    <Link to="/searchSite" className="nav-link" onClick={cleanTagid}>景點推薦</Link>
                                 </li>
                                 <li className="nav-item my-2"><a href="test.html" className="nav-link">專屬旅程小測驗</a></li>
                                 <li className="nav-item my-2">
-                                    <Link to="/foodMap" className="nav-link">美食地圖</Link>
+                                    <Link to="/foodMap" className="nav-link" onClick={cleanTagid}>美食地圖</Link>
                                 </li>
                                 {renderNavLinks()}
                             </ul>
@@ -89,7 +89,7 @@ const Header = () => {
                                         <button id="logoutBtn" className="btn text-white" onClick={handleLogout}>會員登出</button>
                                     ) : (
                                         <button id="loginBtn" type="button" className="btn text-white loginbtn"
-                                            data-bs-toggle="modal" data-bs-target="#loginModal">登入</button>
+                                            data-bs-toggle="modal" data-bs-target="#loginModal" onClick={cleanTagid}>登入</button>
                                     )}
                                 </li>
                                 <li className="nav-item d-flex p-2">
@@ -100,7 +100,7 @@ const Header = () => {
                     </div>
                 </nav>
             </header >
-            <Login/>
+            <Login />
         </>
     );
 };

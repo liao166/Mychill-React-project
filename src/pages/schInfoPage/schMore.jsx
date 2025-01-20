@@ -55,7 +55,7 @@ function SchMore() {
     // 更新選中的標籤
     const handleTagChange = (e) => {
         const { value, checked } = e.target;
-        localStorage.removeItem('tag_id');
+        localStorage.removeItem('tag_id'); // 清除 tag_id
         setSelectedTags((prev) =>
             checked ? [...prev, value] : prev.filter((tag) => tag !== value)
         );
