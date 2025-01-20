@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from 'moment';
 
 function SchMoreCard({ selectedCities, selectedTags }) {
     const [cards, setCards] = useState([]);
@@ -86,10 +87,12 @@ function SchMoreCard({ selectedCities, selectedTags }) {
                 // 取消 Like
                 await axios.delete("http://localhost:8080/schInfo/removeLike", { data: postData });
                 setLikedSchIds((prev) => prev.filter((id) => id !== schId));
+                alert('已取消');
             } else {
                 // 加入 Like
                 await axios.post("http://localhost:8080/schInfo/getToLike", postData);
                 setLikedSchIds((prev) => [...prev, schId]);
+                alert('加入成功');
             }
         } catch (error) {
             console.error("無法更新喜好:", error);
@@ -98,12 +101,8 @@ function SchMoreCard({ selectedCities, selectedTags }) {
 
     // 當篩選條件變化時，重新加載卡片
     useEffect(() => {
-        if (selectedTags.length > 0) {
-            updateCards();
-        } else {
-            renderRandomCards();
-        }
-    }, [selectedTags]);
+        updateCards();
+    }, [selectedCities, selectedTags]);
 
     // 渲染卡片
     if (!cards.length) {
@@ -111,7 +110,7 @@ function SchMoreCard({ selectedCities, selectedTags }) {
     }
 
     return cards.map((card) => {
-        const startDate = card.edit_date.slice(0, 10);
+        const startDate = moment(card.edit_date).format('YYYY-MM-DD');
         const isLiked = likedSchIds.includes(card.sch_id);
 
         return (

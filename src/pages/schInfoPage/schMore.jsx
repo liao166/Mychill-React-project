@@ -13,11 +13,7 @@ function SchMore() {
     // 獲取參數 tag_id
     useEffect(() => {
         const tag_id = localStorage.getItem('tag_id');
-        if (tag_id) {
-            setSelectedTags([Number(tag_id)]);
-        } else {
-            setSelectedTags([]);
-        }
+        setSelectedTags(tag_id ? [Number(tag_id)] : []);
     }, [localStorage.getItem('tag_id')]);
 
     // 獲取縣市地名

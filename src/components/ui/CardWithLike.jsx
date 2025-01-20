@@ -5,7 +5,7 @@ const CardWithLike = () => {
     const [cards, setCards] = useState([]); // 儲存卡片資料
     const [likedItems, setLikedItems] = useState([]); // 已喜歡的項目
 
-    // const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const emailid = localStorage.getItem('emailid');
 
     // 載入行程卡片和已喜歡項目
@@ -13,10 +13,10 @@ const CardWithLike = () => {
         const fetchData = async () => {
             try {
                 // 載入已喜歡項目
-                // const likedResponse = token
-                //     ? await axios.get(`http://localhost:8080/schInfo/getLikedItems/${emailid}`)
-                //     : { data: [] };
-                // setLikedItems(likedResponse.data);
+                const likedResponse = token
+                    ? await axios.get(`http://localhost:8080/schInfo/getLikedItems/${emailid}`)
+                    : { data: [] };
+                setLikedItems(likedResponse.data);
 
                 // 載入所有行程卡片
                 const response = await axios.get('http://localhost:8080/schInfo/getsch');
@@ -33,14 +33,13 @@ const CardWithLike = () => {
 
     // 點擊喜歡按鈕
     const handleLikeButtonClick = async (schId) => {
-        // if (!token) {
-        //     alert('請先登入');
-        //     window.location.href = 'index.html';
-        //     return;
-        // }
+        if (!token) {
+            alert("登入後才能加入收藏!");
+            return;
+        }
 
-        // const isLiked = likedItems.includes(schId);
-        // const postData = { emailid, sch_id: schId };
+        const isLiked = likedItems.includes(schId);
+        const postData = { emailid, sch_id: schId };
 
         try {
             if (isLiked) {

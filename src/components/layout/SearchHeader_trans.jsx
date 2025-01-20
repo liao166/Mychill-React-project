@@ -53,7 +53,7 @@ const Header = () => {
         <>
             <header className="Trans container-fluid p-0">
                 <nav className="searchNav navbar navbar-expand-md navbar-light ps-4 pe-4">
-                    <a className="navbar-brand" href="/" onClick={handleLogout}>
+                    <a className="navbar-brand" href="/" onClick={cleanTagid}>
                         <img src="/public/images/logo/chillAround_logo_01.png" alt="Logo" />
                     </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -77,7 +77,7 @@ const Header = () => {
                                 <li className="nav-item my-2">
                                     <Link to="/searchSite" className="nav-link" onClick={cleanTagid}>景點推薦</Link>
                                 </li>
-                                <li className="nav-item my-2"><a href="test.html" className="nav-link">專屬旅程小測驗</a></li>
+                                <li className="nav-item my-2"><a href="test" className="nav-link">專屬旅程小測驗</a></li>
                                 <li className="nav-item my-2">
                                     <Link to="/foodMap" className="nav-link" onClick={cleanTagid}>美食地圖</Link>
                                 </li>
