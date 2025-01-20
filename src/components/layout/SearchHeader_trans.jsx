@@ -53,7 +53,7 @@ const Header = () => {
         <>
             <header className="Trans container-fluid p-0">
                 <nav className="searchNav navbar navbar-expand-md navbar-light ps-4 pe-4">
-                    <a className="navbar-brand" href="/">
+                    <a className="navbar-brand" href="/" onClick={handleLogout}>
                         <img src="/public/images/logo/chillAround_logo_01.png" alt="Logo" />
                     </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -93,7 +93,7 @@ const Header = () => {
                                     )}
                                 </li>
                                 <li className="nav-item d-flex p-2">
-                                    <a href="buildPlan"><i className="bi bi-plus-circle"></i></a>
+                                    <a href="buildPlan" onClick={handleLogout}><i className="bi bi-plus-circle"></i></a>
                                 </li>
                             </ul>
                         </div>
